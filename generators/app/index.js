@@ -69,7 +69,6 @@ module.exports = class extends Generator {
     copy.call(this, 'src');
     copy.call(this, '.babelrc');
     copy.call(this, 'webpack.config.js');
-    copy.call(this, '.gitignore');
     copy.call(this, 'README.md');
     copy.call(this, 'LICENSE');
 
