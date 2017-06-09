@@ -1,0 +1,43 @@
+{
+  "name": "<%= projectName %>",
+  "author": {
+    "name": "<%= userName %>",
+    "email": "<%= email %>"
+  },
+  "description": "<%= description %>",
+  "version": "<%= version %>",
+  "repository": {
+    "type": "git",
+    "url": "<%= repository %>"
+  },
+  "license": "MIT",
+  "scripts": {
+    "hot": "webpack-dev-server --env=dev",
+    "clean": "rm -rf dist",
+    "prestart": "npm run clean",
+    "start": "npm run dev",
+    "predev": "npm run clean",
+    "dev": "webpack --env=dev --progress --profile --colors",
+    "preprod": "npm run clean",
+    "prod": "webpack --env=prod --progress --profile --colors"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "css-loader": "^0.28.4",
+    "extract-text-webpack-plugin": "^2.1.2",
+    "html-webpack-plugin": "^2.28.0",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.4",
+    "vue-loader": "^12.2.1",
+    "vue-template-compiler": "^2.3.3",
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5",
+    "webpack-merge": "^4.1.0"
+  },
+  "dependencies": {
+    "vue": "^2.3.3"
+  }
+}
