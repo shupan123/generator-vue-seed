@@ -5,16 +5,6 @@ const yosay = require('yosay');
 const path = require('path');
 const mkdirp = require('mkdirp');
 
-const copy = function (from, to) {
-  if (to === undefined) {
-    to = from;
-  }
-  this.fs.copy(
-    this.templatePath(from),
-    this.destinationPath(to)
-  );
-};
-
 module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
@@ -64,13 +54,23 @@ module.exports = class extends Generator {
       this.destinationRoot(this.destinationPath(this.props.projectName));
     }
   }
+  _copy(from, to) {
+    if (to === undefined) {
+      to = from;
+    }
+    this.fs.copy(
+      this.templatePath(from),
+      this.destinationPath(to)
+    );
+  }
   writing() {
-    copy.call(this, 'conf');
-    copy.call(this, 'src');
-    copy.call(this, '.babelrc');
-    copy.call(this, 'webpack.config.js');
-    copy.call(this, 'README.md');
-    copy.call(this, 'LICENSE');
+    this._copy('conf');
+    this._copy('src');
+    this._copy('.babelrc');
+    this._copy('gitignore', '.gitignore');
+    this._copy('webpack.config.js');
+    this._copy('README.md');
+    this._copy('LICENSE');
 
     this.fs.copyTpl(
       this.templatePath('_package.json'),
@@ -87,6 +87,12 @@ module.exports = class extends Generator {
   }
 
   install() {
-    this.installDependencies({bower: false});
+    this.installDependencies({bower: false, callback: () => {
+      this._end();
+    }});
+  }
+  _end() {
+    const cmd = chalk.green(`cd ${this.props.projectName}`);
+    this.log(`Please run ${cmd}`);
   }
 };
