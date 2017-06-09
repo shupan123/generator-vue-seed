@@ -12,7 +12,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "hot": "webpack-dev-server --env=dev",
+    "hot": "webpack-dev-server --env=hot",
     "clean": "rm -rf dist",
     "prestart": "npm run clean",
     "start": "npm run dev",

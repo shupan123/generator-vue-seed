@@ -47,8 +47,7 @@ module.exports = class extends Generator {
     }, {
       type: 'input',
       name: 'repository',
-      message: 'Please input project git repository (https://github.com/shupan123/generator-vue-seed.git):',
-      default: 'https://github.com/shupan123/generator-vue-seed.git'
+      message: 'Please input project git repository:'
     }];
 
     return this.prompt(prompts).then(props => {

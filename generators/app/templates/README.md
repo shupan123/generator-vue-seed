@@ -3,6 +3,9 @@
 
 ## Run
 ```
+// hot
+$ npm run hot
+
 // development
 $ npm start // or npm run dev
 
