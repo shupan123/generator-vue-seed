@@ -1,0 +1,5 @@
+FROM blang/alpine-bash
+COPY ./dist/ /data/dist
+CMD ["ls", "-l", "/data/dist"]
+
+

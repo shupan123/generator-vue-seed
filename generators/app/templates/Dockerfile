@@ -38,7 +38,7 @@ COPY webpack.config.js .babelrc ./
 VOLUME /data/<%= projectName %>/dist
 EXPOSE 9000
 
-ENTRYPOINT ["npm", "run"]
-CMD ["prod"]
+# ENTRYPOINT ["npm", "run"]
+CMD ["npm", "run", "prod"]
 
 

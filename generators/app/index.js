@@ -113,6 +113,7 @@ module.exports = class extends Generator {
     this._copy('LICENSE');
     this._copy('CentOS-Base.repo');
     this._copy('bootstrap.sh');
+    this._copy('Dockerfile-data');
 
     this._copy('Dockerfile', null, {
       projectName,
@@ -158,14 +159,14 @@ module.exports = class extends Generator {
   _buildDocker() {
     const {projectName, version, docker} = this.props;
     const cmd = chalk.green(`${projectName}:${version}`);
-    const imageCmd = `docker images | grep ${projectName} | awk '{print $3}'`;
+    // const imageCmd = `docker images | grep ${projectName} | awk '{print $3}'`;
 
     this.spawnCommandSync('docker', ['build', '-t', `${projectName}:${version}`, '.']);
     this.log(`Build docker image ${cmd} success`);
 
-    const imageId = cp.spawnSync('sh', ['-c', imageCmd]).stdout.toString().trim();
-    const dockerRunCmd = chalk.green(`docker run -dP ${imageId}`);
-    this.log(`You can run ${dockerRunCmd} to start vue hot server`);
+    // const imageId = cp.spawnSync('sh', ['-c', imageCmd]).stdout.toString().trim();
+    // const dockerRunCmd = chalk.green(`docker run -dP ${imageId}`);
+    // this.log(`You can run ${dockerRunCmd} to start vue hot server`);
   }
 
   _end() {
