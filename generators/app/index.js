@@ -108,7 +108,7 @@ module.exports = class extends Generator {
     this._copy('.babelrc');
     this._copy('gitignore', '.gitignore');
     this._copy('webpack.config.js');
-    this._copy('package-lock.json');
+    this._copy('_package-lock.json', 'package-lock.json');
     this._copy('README.md');
     this._copy('LICENSE');
     this._copy('CentOS-Base.repo');
