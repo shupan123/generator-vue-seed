@@ -11,7 +11,7 @@ module.exports = merge(commonConfig, {
   devtool: 'source-map',
   output: {
     path: resolve(context, './dist'),
-    publicPath: '/',
+    publicPath: './',
     filename: '[name].[chunkhash:6].js'
   },
   plugins: [

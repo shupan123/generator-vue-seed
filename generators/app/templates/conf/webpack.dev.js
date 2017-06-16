@@ -14,12 +14,6 @@ module.exports = merge(commonConfig, {
     filename: '[name].js'
   },
   devtool: 'inline-source-map',
-  devServer: {
-    hot: true,
-    compress: true,
-    port: 9000,
-    publicPath: '/'
-  },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.ejs',

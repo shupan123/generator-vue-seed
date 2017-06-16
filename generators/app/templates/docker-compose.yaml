@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+  nginx:
+    image: <%= nginx %>
+    ports:
+      - "80:80"
+    volumes:
+      - ./bootstrap.sh:/var/bootstrap.sh
+    volumes_from:
+      - data
+    entrypoint: ["bash", "-c"]
+    command: ["/var/bootstrap.sh /data/<%= projectName %>/dist"]
+    # command: >
+    #   /bin/bash -c '
+    #     while [ "`ls -A /data/<%= projectName %>/dist`" = "" ];
+    #     do
+    #       echo sleeping;
+    #       sleep 1;
+    #     done;
+    #     echo "`ls -A /data/<%= projectName %>/dist`";
+    #     cp -r /data/<%= projectName %>/dist /usr/share/nginx/html;
+    #     nginx -g "daemon off;";
+    #   '
+  data:
+    image: <%= projectName %>:<%= version %>
