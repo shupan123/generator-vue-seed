@@ -1,4 +1,5 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const {optimize, HashedModuleIdsPlugin} = require('webpack');
 const {resolve} = require('path');
 const context = process.cwd();
 
@@ -51,5 +52,16 @@ module.exports = {
       }
     ]
   },
-  plugins: []
+  plugins: [
+    new optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks(module) {
+        return module.context && module.context.indexOf('node_modules') !== -1;
+      }
+    }),
+    new optimize.CommonsChunkPlugin({
+      name: 'manifest'
+    }),
+    new HashedModuleIdsPlugin()
+  ]
 };
