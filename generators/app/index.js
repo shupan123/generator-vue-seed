@@ -37,24 +37,28 @@ module.exports = class extends Generator {
       default: '0.1.0'
     }, {
       type: 'confirm',
+      name: 'npm',
+      message: 'Would you like to install node dependencies?'
+    }, {
+      type: 'confirm',
+      name: 'vueRouter',
+      message: 'Would you like to install vue router?',
+      default: false
+    }, {
+      type: 'confirm',
       name: 'docker',
-      message: 'Would you like to build Docker image?'
+      message: 'Would you like to build Docker image?',
+      default: false
     }, {
       type: 'input',
       name: 'centos',
       message: 'Please input centos registry of docker image (centos):',
       default: 'centos'
-    },
-    {
+    }, {
       type: 'input',
       name: 'nginx',
       message: 'Please input nginx registry of docker image (nginx):',
       default: 'nginx'
-    },
-    {
-      type: 'confirm',
-      name: 'npm',
-      message: 'Would you like to install node dependencies?'
     }, {
       type: 'input',
       name: 'repository',
@@ -100,15 +104,20 @@ module.exports = class extends Generator {
       userName,
       email,
       description,
-      repository
+      repository,
+      vueRouter
     } = this.props;
 
     this._copy('conf');
-    this._copy('src');
+    if (vueRouter) {
+      this._copy('src');
+    } else {
+      this._copy('src/less');
+      this._copy('src/index.ejs');
+    }
     this._copy('.babelrc');
     this._copy('gitignore', '.gitignore');
     this._copy('webpack.config.js');
-    this._copy('_package-lock.json', 'package-lock.json');
     this._copy('README.md');
     this._copy('LICENSE');
     this._copy('CentOS-Base.repo');
@@ -135,9 +144,18 @@ module.exports = class extends Generator {
         email,
         description,
         version,
-        repository
+        repository,
+        vueRouter
       }
     );
+
+    this._copy('src/index.js', null, {
+      vueRouter
+    });
+    
+    this._copy('src/App.vue', null, {
+      vueRouter
+    });
   }
 
   install() {
