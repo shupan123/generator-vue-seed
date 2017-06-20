@@ -16,7 +16,6 @@ const extractCSS = type => {
 module.exports = {
   context,
   entry: {
-    vendor: ['vue'],
     main: './src/index.js'
   },
   resolve: {
@@ -49,6 +48,19 @@ module.exports = {
         test: /\.js$/,
         use: 'babel-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 8192
+          }
+        }]
+      },
+      {
+        test: /\.(ttf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
+        use: 'file-loader'
       }
     ]
   },
